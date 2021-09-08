@@ -1,0 +1,4 @@
+name: Guest book
+description: "This module adds a guestbook."
+type: module
+core_version_requirement: ^8 || ^9
