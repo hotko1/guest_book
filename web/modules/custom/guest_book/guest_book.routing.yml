@@ -4,3 +4,19 @@ guest_book.display_data:
     _controller: 'Drupal\guest_book\Controller\GuestBookController::content'
   requirements:
     _permission: 'access content'
+
+guest_book.delete_form:
+  path: '/guest_book/{id}/delete'
+  defaults:
+    _title: 'DeleteForm'
+    _form: '\Drupal\ar\Form\GuestBookDelete'
+  requirements:
+    _permission: 'access content'
+
+guest_book.edit_form:
+  path: '/guest_book/{id}/edit'
+  defaults:
+    _title: 'EditForm'
+    _form: '\Drupal\ar\Form\GuestBookEdit'
+  requirements:
+    _permission: 'access content'

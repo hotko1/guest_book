@@ -129,7 +129,7 @@ class GuestBookForm extends FormBase {
 
     $fid_img = json_decode(json_encode($user_image), TRUE);
     foreach ($fid_img as $key_img) {
-      $key_img = $key_img['fid_avatar'];
+      $key_img = $key_img['fid_image'];
     }
     $key_img['0'] = $fid_img;
 
@@ -141,7 +141,7 @@ class GuestBookForm extends FormBase {
         )
       );
     }
-    elseif ($user_name > 100) {
+    elseif (100 < $user_name) {
       $response->addCommand(
         new HtmlCommand(
           '.name-result_message',
@@ -169,7 +169,7 @@ class GuestBookForm extends FormBase {
       $response->addCommand(
         new HtmlCommand(
           '.result_message',
-          '<div class="valid">' . $this->t('Your message has been saved.')
+          '<div class="valid">' . $form_state->getValue('name_user') . $this->t('your message has been saved.')
         )
       );
 
@@ -179,12 +179,12 @@ class GuestBookForm extends FormBase {
       $data = [
         'id' => $form_state->getValue('id'),
         'name_user' => $form_state->getValue('name_user'),
-        'email_message' => $form_state->getValue('email_message'),
+        'email_user' => $form_state->getValue('email_user'),
         'phone_user' => $form_state->getValue('phone_user'),
         'message_user' => $form_state->getValue('message_user'),
         'fid_avatar' => $file_fid_ava[0],
         'fid_image' => $file_fid_img[0],
-        'time' => $time,
+        'time_user' => $time,
       ];
 
       $file_ava = File::load($file_fid_ava[0]);

@@ -29,7 +29,7 @@ function guest_book_schema() {
         'default' => '',
       ],
       'phone_user' => [
-        'type' => 'int',
+        'type' => 'varchar',
         'length' => 12,
         'not null' => TRUE,
         'default' => 0,

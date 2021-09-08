@@ -1,0 +1,45 @@
+{% if forms %}
+  <div class="form_wrapper">
+    {{ forms }}
+  </div>
+{% endif %}
+<div class="outputs_wrapper">
+  {% for response in tables %}
+    <div class="outputs_item">
+      <div class="top">
+        <div class="top-left">
+          <div class="user-avatar">
+            {{ response['fid_avatar'] }}
+          </div>
+          <h3 class="user-name">
+            {{ response['name_user'] }}
+          </h3>
+          <p class="user-time">
+            {{ response['time_user'] }}
+          </p>
+        </div>
+        <div class="top-right">
+          <div class="user-image">
+            {{ response['fid_image'] }}
+          </div>
+          <p class="user-message">
+            {{ response['message_user'] }}
+          </p>
+        </div>
+      </div>
+      <div class="middle">
+        <p class="user-email">
+          {{ response['email_user'] }}
+        </p>
+        <a class="user-phone" href="tel:+{{ response['phone_user'] }}">{{ response['phone_user'] }}</a>
+      </div>
+      <div class="button"></div>
+      {% if user.hasPermission('ROLE_ADMIN') %}
+        <div class="bottom-wrapper">
+          {{ response['delete'] }}
+          {{ response['edit'] }}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
