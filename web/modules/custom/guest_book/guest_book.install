@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Create table guest_book.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function guest_book_schema() {
+  $schema['guest_book'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name_user' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'email_user' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'phone_user' => [
+        'type' => 'int',
+        'length' => 12,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'message_user' => [
+        'type' => 'varchar',
+        'length' => 1000,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'fid_avatar' => [
+        'type' => 'int',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'fid_image' => [
+        'type' => 'int',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'time_user' => [
+        'type' => 'int',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => [
+      'id',
+    ],
+  ];
+
+  return $schema;
+}
