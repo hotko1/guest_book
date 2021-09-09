@@ -143,11 +143,10 @@ class GuestBookEdit extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function setMessenge(array $form, FormStateInterface $form_state, $id = NULL) {
-    \Drupal::messenger()->deleteAll();
+  public function setMessage(array &$form, FormStateInterface $form_state, $id = NULL) {
+//    \Drupal::messenger()->deleteAll();
     $response = new AjaxResponse();
     $user_name = strlen($form_state->getValue('name_user'));
-    //    $user_phone = strlen($form_state->getValue('phone_user'));
     $user_avatar = ($form_state->getValue('fid_avatar'));
     $user_image = ($form_state->getValue('fid_image'));
 
@@ -227,8 +226,8 @@ class GuestBookEdit extends FormBase {
       global $_global_fid_img;
       $img_fid = $_global_fid_img;
       if ($file_fid_img[0] != $img_fid) {
-        $query_ava = \Drupal::database();
-        $query_ava->update('file_managed')
+        $query_img = \Drupal::database();
+        $query_img->update('file_managed')
           ->condition('fid', $img_fid)
           ->fields(['status' => '0'])
           ->execute();
@@ -249,6 +248,8 @@ class GuestBookEdit extends FormBase {
         \Drupal::database()->insert('guest_book')->fields($data)->execute();
       }
       \Drupal::messenger()->addStatus('Successfully update');
+
+      $response->addCommand(new RedirectCommand('/guest_book'));
     }
 
     return $response;

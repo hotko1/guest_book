@@ -38,18 +38,31 @@ class GuestBookBlock extends Database {
 
       $domen = $_SERVER['SERVER_NAME'];
       $file_ava = File::load($data->fid_avatar);
-      $image_ava = $file_ava->createFileUrl();
+      if (is_null($file_ava)) {
+//        $data->fid_avatar = '';
+        $image_ava = '/modules/custom/guest_book/files/default_ava.png';
+      }
+      else {
+        $image_ava = $file_ava->createFileUrl();
+      }
+//      $image_ava = $file_ava->createFileUrl();
       $url_ava = "//{$domen}{$image_ava}";
       $out_ava = '<img class="avatar-user" src="' . $url_ava . '" alt="User avatar">';
-      $out_ava_link = '<a class="link-avatar" href="' . $url_ava . '" target="_blank">' . $out_ava . '</a>';
-      $render_ava = render($out_ava_link);
+//      $out_ava_link = '<a class="link-avatar" href="' . $url_ava . '" target="_blank">' . $out_ava . '</a>';
+      $render_ava = render($out_ava);
       $ava_markup = Markup::create($render_ava);
 
       $file_img = File::load($data->fid_image);
-      $image_img = $file_img->createFileUrl();
+      if (is_null($file_img)) {
+        $image_img = '0';
+      }
+      else {
+        $image_img = $file_img->createFileUrl();
+      }
+//      $image_img = $file_img->createFileUrl();
       $url_img = "//{$domen}{$image_img}";
-      $out_img = '<img class="avatar-user" src="' . $url_img . '" alt="User avatar">';
-      $out_img_link = '<a class="link-avatar" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
+      $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
+      $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
       $render_img = render($out_img_link);
       $img_markup = Markup::create($render_img);
 

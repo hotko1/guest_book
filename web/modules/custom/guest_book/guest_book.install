@@ -44,13 +44,13 @@ function guest_book_schema() {
         'type' => 'int',
         'length' => 255,
         'not null' => TRUE,
-        'default' => 0,
+//        'default' => 0,
       ],
       'fid_image' => [
         'type' => 'int',
         'length' => 255,
         'not null' => TRUE,
-        'default' => 0,
+//        'default' => 0,
       ],
       'time_user' => [
         'type' => 'int',

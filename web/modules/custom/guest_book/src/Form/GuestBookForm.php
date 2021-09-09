@@ -81,7 +81,8 @@ class GuestBookForm extends FormBase {
       '#type' => 'managed_file',
       '#title' => $this->t('Download avatar'),
       '#description' => $this->t('Avatar should be less than 2 MB and in JPEG, JPG or PNG format.'),
-      '#default_value' => '',
+//      '#default_value' => '',
+//      '#required' => FALSE,
       '#upload_validation' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [2097152],
@@ -96,6 +97,7 @@ class GuestBookForm extends FormBase {
       '#type' => 'managed_file',
       '#title' => $this->t('Download image'),
       '#description' => $this->t('Image should be less than 5 MB and in JPEG, JPG or PNG format.'),
+//      '#required' => FALSE,
       '#upload_validation' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [5242880],
@@ -173,7 +175,7 @@ class GuestBookForm extends FormBase {
       $response->addCommand(
         new HtmlCommand(
           '.result_message',
-          '<div class="valid">' . $form_state->getValue('name_user') . $this->t('your message has been saved.')
+          '<div class="valid">' . $form_state->getValue('name_user') . ' ' . $this->t('your message has been saved.')
         )
       );
 
@@ -191,13 +193,23 @@ class GuestBookForm extends FormBase {
         'time_user' => $time,
       ];
 
-      $file_ava = File::load($file_fid_ava[0]);
-      $file_ava->setPermanent();
-      $file_ava->save();
+      if (is_null($file_fid_ava[0])) {
+        $data['fid_avatar'] = 0;
+      }
+      else {
+        $file_ava = File::load($file_fid_ava[0]);
+        $file_ava->setPermanent();
+        $file_ava->save();
+      }
 
-      $file_img = File::load($file_fid_img[0]);
-      $file_img->setPermanent();
-      $file_img->save();
+      if (is_null($file_fid_img[0])) {
+        $data['fid_image'] = 0;
+      }
+      else {
+        $file_img = File::load($file_fid_img[0]);
+        $file_img->setPermanent();
+        $file_img->save();
+      }
 
       if (isset($_GET['id'])) {
         \Drupal::database()->update('guest_book')->fields($data)->condition('id', $_GET['id'])->execute();

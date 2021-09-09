@@ -9,7 +9,7 @@ guest_book.delete_form:
   path: '/guest_book/{id}/delete'
   defaults:
     _title: 'DeleteForm'
-    _form: '\Drupal\ar\Form\GuestBookDelete'
+    _form: '\Drupal\guest_book\Form\GuestBookDelete'
   requirements:
     _permission: 'access content'
 
@@ -17,6 +17,6 @@ guest_book.edit_form:
   path: '/guest_book/{id}/edit'
   defaults:
     _title: 'EditForm'
-    _form: '\Drupal\ar\Form\GuestBookEdit'
+    _form: '\Drupal\guest_book\Form\GuestBookEdit'
   requirements:
     _permission: 'access content'
