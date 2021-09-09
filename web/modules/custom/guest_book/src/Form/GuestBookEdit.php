@@ -69,6 +69,10 @@ class GuestBookEdit extends FormBase {
       '#attributes' => [
         'placeholder' => 'example@email.com',
       ],
+      '#ajax' => [
+        'callback' => '::mailValidateCallback',
+        'event' => 'change',
+      ],
     ];
     $form['phone_message'] = [
       '#type' => 'markup',
@@ -138,6 +142,31 @@ class GuestBookEdit extends FormBase {
     $_global_fid_img = $data['fid_image'];
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function mailValidateCallback(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    if (!filter_var($form_state->getValue('email_user'), FILTER_VALIDATE_EMAIL)) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.email-result_message',
+          '<div class="novalid">' . $this->t('Invalid mail.')
+        )
+      );
+    }
+    else {
+      $response->addCommand(
+        new HtmlCommand(
+          '.email-result_message',
+          NULL
+        )
+      );
+    }
+
+    return $response;
   }
 
   /**
@@ -233,13 +262,31 @@ class GuestBookEdit extends FormBase {
           ->execute();
       }
 
-      $file_ava = File::load($file_fid_ava[0]);
-      $file_ava->setPermanent();
-      $file_ava->save();
+      if (is_null($file_fid_ava[0])) {
+        $data['fid_avatar'] = 0;
+      }
+      else {
+        $file_ava = File::load($file_fid_ava[0]);
+        $file_ava->setPermanent();
+        $file_ava->save();
+      }
 
-      $file_img = File::load($file_fid_img[0]);
-      $file_img->setPermanent();
-      $file_img->save();
+      if (is_null($file_fid_img[0])) {
+        $data['fid_image'] = 0;
+      }
+      else {
+        $file_img = File::load($file_fid_img[0]);
+        $file_img->setPermanent();
+        $file_img->save();
+      }
+
+//      $file_ava = File::load($file_fid_ava[0]);
+//      $file_ava->setPermanent();
+//      $file_ava->save();
+//
+//      $file_img = File::load($file_fid_img[0]);
+//      $file_img->setPermanent();
+//      $file_img->save();
 
       if (isset($this->id)) {
         \Drupal::database()->update('guest_book')->fields($data)->condition('id', $this->id)->execute();

@@ -17,5 +17,10 @@ function guest_book_theme($existing, $type, $theme, $path) {
         'title' => '',
       ],
     ],
+    'guest-book-admin' => [
+      'variables' => [
+        'forms' =>[],
+      ],
+    ],
   ];
 }

@@ -24,7 +24,7 @@ class GuestBookController extends ControllerBase {
       '#theme' => 'guest_book',
       '#forms' => $simple_form,
       '#tables' => $table_output,
-      '#title' => $this->t('Hello! You can add here a guest.'),
+      '#title' => $this->t('Hello! You can add here a response.'),
     ];
   }
 

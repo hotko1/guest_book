@@ -54,17 +54,22 @@ class GuestBookBlock extends Database {
 
       $file_img = File::load($data->fid_image);
       if (is_null($file_img)) {
-        $image_img = '0';
+        $img_markup = '';
       }
       else {
         $image_img = $file_img->createFileUrl();
+        $url_img = "//{$domen}{$image_img}";
+        $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
+        $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
+        $render_img = render($out_img_link);
+        $img_markup = Markup::create($render_img);
       }
 //      $image_img = $file_img->createFileUrl();
-      $url_img = "//{$domen}{$image_img}";
-      $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
-      $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
-      $render_img = render($out_img_link);
-      $img_markup = Markup::create($render_img);
+//      $url_img = "//{$domen}{$image_img}";
+//      $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
+//      $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
+//      $render_img = render($out_img_link);
+//      $img_markup = Markup::create($render_img);
 
       $text_delete = t('Delete');
       $url_delete = Url::fromRoute('guest_book.delete_form', ['id' => $data->id], []);
