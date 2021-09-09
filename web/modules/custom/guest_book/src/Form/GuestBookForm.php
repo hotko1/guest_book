@@ -24,6 +24,10 @@ class GuestBookForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $formState) {
+    $form['result_message'] = [
+      '#type' => 'markup',
+      '#markup' => '<div class="result_message"></div>',
+    ];
     $form['name_message'] = [
       '#type' => 'markup',
       '#markup' => '<div class="name-result_message"></div>',
@@ -100,7 +104,7 @@ class GuestBookForm extends FormBase {
     ];
     $form['submit'] = [
       '#type' => 'button',
-      '#value' => $this->t('Add guest'),
+      '#value' => $this->t('Add response'),
       '#ajax' => [
         'callback' => '::setMessage',
         'event' => 'click',

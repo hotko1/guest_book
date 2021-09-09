@@ -79,13 +79,10 @@ class GuestBookBlock extends Database {
         'fid_avatar' => $ava_markup,
         'name_user' => $data->name_user,
         'time_user' => $time_out,
-
         'fid_image' => $img_markup,
         'message_user' => $data->message_user,
-
         'email_user' => $data->email_user,
         'phone_user' => $data->phone_user,
-
         'delete' => $link_delete,
         'edit' => $link_edit,
       ];
