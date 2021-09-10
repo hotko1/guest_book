@@ -1,3 +1,4 @@
+{{ attach_library('guest_book/guest_book_page') }}
 {% if forms %}
   <div class="form_wrapper">
     {{ forms }}
@@ -8,15 +9,17 @@
     <div class="outputs_item">
       <div class="top">
         <div class="top-left">
-          <div class="user-avatar">
-            {{ response['fid_avatar'] }}
+          <div class="top-left-warpper">
+            <div class="user-avatar">
+              {{ response['fid_avatar'] }}
+            </div>
+            <h3 class="user-name">
+              {{ response['name_user'] }}
+            </h3>
+            <p class="user-time">
+              {{ response['time_user'] }}
+            </p>
           </div>
-          <h3 class="user-name">
-            {{ response['name_user'] }}
-          </h3>
-          <p class="user-time">
-            {{ response['time_user'] }}
-          </p>
         </div>
         <div class="top-right">
           <div class="user-image">
@@ -33,9 +36,8 @@
         </p>
         <a class="user-phone" href="tel:+{{ response['phone_user'] }}">+{{ response['phone_user'] }}</a>
       </div>
-      <div class="button"></div>
       {% if user.hasPermission('ROLE_ADMIN') %}
-        <div class="bottom-wrapper">
+        <div class="bottom">
           {{ response['delete'] }}
           {{ response['edit'] }}
         </div>

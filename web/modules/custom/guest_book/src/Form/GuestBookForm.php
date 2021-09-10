@@ -160,6 +160,7 @@ class GuestBookForm extends FormBase {
     \Drupal::messenger()->deleteAll();
     $response = new AjaxResponse();
     $user_name = strlen($form_state->getValue('name_user'));
+    $user_message = strlen($form_state->getValue('message_user'));
 //    $user_phone = strlen($form_state->getValue('phone_user'));
     $user_avatar = ($form_state->getValue('fid_avatar'));
     $user_image = ($form_state->getValue('fid_image'));
@@ -189,6 +190,14 @@ class GuestBookForm extends FormBase {
         new HtmlCommand(
           '.name-result_message',
           '<div class="novalid">' . $this->t('Your name is too long. Please enter a really name.')
+        )
+      );
+    }
+    elseif ($user_message < 1) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.message-result_message',
+          '<div class="novalid">' . $this->t('Message is required.')
         )
       );
     }

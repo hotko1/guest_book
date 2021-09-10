@@ -1,0 +1,11 @@
+guest_book_page:
+  version: 1.x
+  css:
+    theme:
+      css/guest_book_page.css: {}
+
+guest_book_admin:
+  version: 1.x
+  css:
+    theme:
+      css/guest_book_admin.css: {}

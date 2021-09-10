@@ -1,0 +1,230 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  text-decoration: none;
+}
+
+.navbar.navbar-default {
+  background-color: #99cc33;
+}
+
+.ui-widget-content .ui-widget-header .ui-dialog-titlebar-close:before {
+  position: absolute;
+  content: "X";
+  font-size: 18px;
+  color: #000000;
+  transform: translate(-50%, -50%);
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .result_message, .ui-widget-content .ui-dialog-content .guest-book-form-edit .name-result_message, .ui-widget-content .ui-dialog-content .guest-book-form-edit .email-result_message, .ui-widget-content .ui-dialog-content .guest-book-form-edit .phone-result_message, .ui-widget-content .ui-dialog-content .guest-book-form-edit .message-result_message, .ui-widget-content .ui-dialog-content .guest-book-form-edit .fid-result_message {
+  margin-bottom: 15px;
+  text-align: center;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .result_message .valid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .name-result_message .valid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .email-result_message .valid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .phone-result_message .valid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .message-result_message .valid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .fid-result_message .valid {
+  background: #f5f5f5;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #20b2aa;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .result_message .novalid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .name-result_message .novalid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .email-result_message .novalid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .phone-result_message .novalid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .message-result_message .novalid, .ui-widget-content .ui-dialog-content .guest-book-form-edit .fid-result_message .novalid {
+  background: #ffe4b5;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #ff4500;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-email-user .input-group {
+  display: block;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-email-user .input-group .input-group-addon {
+  display: none;
+}
+
+.main-container .row .col-sm-12 .region-content {
+  padding: 20px;
+  background: #66ccff;
+}
+.main-container .row .col-sm-12 .region-content .page-header {
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: #ffffff;
+  text-align: center;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .fid-result_message {
+  margin-top: 50px;
+  margin-bottom: 0;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .result_message, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .name-result_message, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .email-result_message, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .phone-result_message, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .message-result_message, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .fid-result_message {
+  margin-bottom: 15px;
+  text-align: center;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .result_message .valid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .name-result_message .valid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .email-result_message .valid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .phone-result_message .valid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .message-result_message .valid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .fid-result_message .valid {
+  background: #f5f5f5;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #20b2aa;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .result_message .novalid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .name-result_message .novalid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .email-result_message .novalid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .phone-result_message .novalid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .message-result_message .novalid, .main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .fid-result_message .novalid {
+  background: #ffe4b5;
+  font-size: 18px;
+  line-height: 36px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #ff4500;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-group .control-label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-group .input-group {
+  display: block;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-group .input-group .form-control {
+  margin-bottom: 15px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-group .input-group .input-group-addon {
+  display: none;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-group .form-type-managed-file .control-label {
+  margin-top: 15px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-group .form-type-managed-file .form-managed-file {
+  margin-top: 0;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form div .form-group div {
+  margin-top: 45px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form div .form-group .form-group {
+  margin-top: 0;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper .guest-book-form .form-submit {
+  margin-top: 15px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper {
+  margin-top: 40px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item {
+  display: block;
+  margin-top: 20px;
+  padding: 25px;
+  background: #ffcc66;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top {
+  display: flex;
+  margin: 10px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top .top-left .top-left-warpper {
+  border: 2px solid #c0c0c0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top .top-left .top-left-warpper .user-avatar .avatar-user {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top .top-left .top-left-warpper .user-name {
+  font-size: 28px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top .top-right {
+  width: 100%;
+  padding: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #ffffff;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top .top-right .user-image {
+  margin-right: 20px;
+  float: left;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .top .top-right .user-image .link-image .image-user {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .middle {
+  border: 2px solid #66cdaa;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .middle .user-email {
+  margin: 0;
+  font-size: 18px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .middle .user-phone {
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 18px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .bottom {
+  margin-top: 20px;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .bottom a {
+  display: inline-block;
+  padding: 15px;
+  width: 100px;
+  background: #990000;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+.main-container .row .col-sm-12 .region-content .form_wrapper + .outputs_wrapper .outputs_item .bottom a + a {
+  margin-left: 20px;
+}
+
+/*# sourceMappingURL=guest_book_page.css.map */

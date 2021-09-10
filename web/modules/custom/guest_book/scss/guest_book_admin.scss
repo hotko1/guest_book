@@ -1,0 +1,35 @@
+@import "reset";
+@import "mixins";
+.dialog-off-canvas-main-canvas{
+  .layout-container{
+    .page-content{
+      .region-content{
+        .block-system-main-block{
+          .form-admin{
+            .guest-book-list{
+              .responsive-enabled{
+                tbody{
+                  tr{
+                    td{
+                      &:nth-child(7){
+                        min-width: 124px;
+                      }
+                      &:nth-child(8){
+                        min-width: 124px;
+                      }
+                      img{
+                        object-fit: cover;
+                        width: 100px;
+                        height: 100px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
