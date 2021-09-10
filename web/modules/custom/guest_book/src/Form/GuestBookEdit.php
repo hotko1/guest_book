@@ -149,7 +149,7 @@ class GuestBookEdit extends FormBase {
    */
   public function mailValidateCallback(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    if (!filter_var($form_state->getValue('email_user'), FILTER_VALIDATE_EMAIL)) {
+    if (!preg_match('/^[a-z._@-]{0,100}$/', $form_state->getValue('email_user'))) {
       $response->addCommand(
         new HtmlCommand(
           '.email-result_message',

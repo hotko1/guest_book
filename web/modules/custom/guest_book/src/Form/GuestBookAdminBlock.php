@@ -95,7 +95,7 @@ class GuestBookAdminBlock extends FormBase {
       //      $img_markup = Markup::create($render_img);
 
       $text_delete = t('Delete');
-      $url_delete = Url::fromRoute('guest_book.delete_form', ['id' => $data->id], []);
+      $url_delete = Url::fromRoute('guest_book.admin_delete', ['id' => $data->id], []);
       $url_delete->setOptions([
         'attributes' => [
           'class' => ['use-ajax', 'button', 'button-small'],
@@ -106,7 +106,7 @@ class GuestBookAdminBlock extends FormBase {
       $link_delete = Link::fromTextAndUrl($text_delete, $url_delete);
 
       $text_edit = t('Edit');
-      $url_edit = Url::fromRoute('guest_book.edit_form', ['id' => $data->id], []);
+      $url_edit = Url::fromRoute('guest_book.admin_edit', ['id' => $data->id], []);
       $url_edit->setOptions([
         'attributes' => [
           'class' => ['use-ajax', 'button', 'button-small'],
@@ -176,16 +176,16 @@ class GuestBookAdminBlock extends FormBase {
           ->execute();
       }
 
-      $fid_img = \Drupal::database()->select('guest_book', 'm')
+      $fid_img = \Drupal::database()->select('guest_book', 'k')
         ->condition('id', $deletes, 'IN')
-        ->fields('m', ['fid_image'])
+        ->fields('k', ['fid_image'])
         ->execute()->fetchAll();
       $fid_img = json_decode(json_encode($fid_img), TRUE);
       foreach ($fid_img as $key_img) {
         $key_img = $key_img['fid_image'];
         $query_img = \Drupal::database();
         $query_img->update('file_managed')
-          ->condition('fid_avatar', $key_img, 'IN')
+          ->condition('fid_image', $key_img, 'IN')
           ->fields(['status' => '0'])
           ->execute();
       }

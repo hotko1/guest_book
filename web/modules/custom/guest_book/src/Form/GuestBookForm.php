@@ -87,7 +87,7 @@ class GuestBookForm extends FormBase {
       '#description' => $this->t('Avatar should be less than 2 MB and in JPEG, JPG or PNG format.'),
 //      '#default_value' => '',
 //      '#required' => FALSE,
-      '#upload_validation' => [
+      '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [2097152],
       ],
@@ -102,7 +102,7 @@ class GuestBookForm extends FormBase {
       '#title' => $this->t('Download image'),
       '#description' => $this->t('Image should be less than 5 MB and in JPEG, JPG or PNG format.'),
 //      '#required' => FALSE,
-      '#upload_validation' => [
+      '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [5242880],
       ],
@@ -125,7 +125,15 @@ class GuestBookForm extends FormBase {
    */
   public function mailValidateCallback(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    if (!filter_var($form_state->getValue('email_user'), FILTER_VALIDATE_EMAIL)) {
+//    if (!filter_var($form_state->getValue('email_user'), FILTER_VALIDATE_EMAIL)) {
+//      $response->addCommand(
+//        new HtmlCommand(
+//          '.email-result_message',
+//          '<div class="novalid">' . $this->t('Invalid mail.')
+//        )
+//      );
+//    }
+    if (!preg_match('/^[a-z._@-]{0,100}$/', $form_state->getValue('email_user'))) {
       $response->addCommand(
         new HtmlCommand(
           '.email-result_message',

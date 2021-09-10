@@ -33,7 +33,7 @@ guest_book.admin_delete:
   path: '/admin/structure/{id}/delete'
   defaults:
     _title: 'Delete response'
-    _controller: '\Drupal\guest_book\Form\GuestBookAdminDelete'
+    _form: '\Drupal\guest_book\Form\GuestBookAdminDelete'
   requirements:
     _permission: 'access content'
 
@@ -41,6 +41,6 @@ guest_book.admin_edit:
   path: '/admin/structure/{id}/edit'
   defaults:
     _title: 'Edit response'
-    _controller: '\Drupal\guest_book\Form\GuestBookAdminEdit'
+    _form: '\Drupal\guest_book\Form\GuestBookAdminEdit'
   requirements:
     _permission: 'access content'

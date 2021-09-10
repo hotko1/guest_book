@@ -31,7 +31,7 @@
         <p class="user-email">
           {{ response['email_user'] }}
         </p>
-        <a class="user-phone" href="tel:+{{ response['phone_user'] }}">{{ response['phone_user'] }}</a>
+        <a class="user-phone" href="tel:+{{ response['phone_user'] }}">+{{ response['phone_user'] }}</a>
       </div>
       <div class="button"></div>
       {% if user.hasPermission('ROLE_ADMIN') %}
