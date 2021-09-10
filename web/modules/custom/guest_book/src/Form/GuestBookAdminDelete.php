@@ -14,9 +14,16 @@ use Drupal\Core\Url;
 class GuestBookAdminDelete extends ConfirmFormBase {
 
   /**
-   * {@inheritdoc}
+   * The id of the item to be deleted.
+   *
+   * @var \Drupal\guest_book\Form\GuestBookAdminDelete
    */
-  public $id;
+  protected $id;
+
+//  /**
+//   * I set the scope.
+//   */
+//  public $id;
 
   /**
    * {@inheritdoc}
@@ -100,7 +107,7 @@ class GuestBookAdminDelete extends ConfirmFormBase {
     }
 
     $query->delete('guest_book')
-      ->condition('id', $this->id)
+      ->condition('id', $this->id, 'IN')
       ->execute();
 
     \Drupal::messenger()->addStatus('Successfully deleted.');

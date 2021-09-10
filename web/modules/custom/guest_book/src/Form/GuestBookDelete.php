@@ -14,9 +14,16 @@ use Drupal\Core\Url;
 class GuestBookDelete extends ConfirmFormBase {
 
   /**
-   * {@inheritdoc}
+   * The id of the item to be edited.
+   *
+   * @var \Drupal\guest_book\Form\GuestBookDelete
    */
-  public $id;
+  protected $id;
+
+//  /**
+//   * {@inheritdoc}
+//   */
+//  public $id;
 
   /**
    * {@inheritdoc}

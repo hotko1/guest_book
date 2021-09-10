@@ -25,9 +25,16 @@ class GuestBookAdminEdit extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * The id of the item to be edited.
+   *
+   * @var \Drupal\guest_book\Form\GuestBookAdminEdit
    */
-  public $id;
+  protected $id;
+
+//  /**
+//   * {@inheritdoc}
+//   */
+//  public $id;
 
   /**
    * {@inheritdoc}
@@ -106,7 +113,7 @@ class GuestBookAdminEdit extends FormBase {
       '#title' => $this->t('Download avatar'),
       '#default_value' => [$data['fid_avatar']],
       '#description' => $this->t('Avatar should be less than 2 MB and in JPEG, JPG or PNG format.'),
-      '#upload_validation' => [
+      '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [2097152],
       ],
@@ -121,7 +128,7 @@ class GuestBookAdminEdit extends FormBase {
       '#title' => $this->t('Download image'),
       '#default_value' => [$data['fid_image']],
       '#description' => $this->t('Image should be less than 5 MB and in JPEG, JPG or PNG format.'),
-      '#upload_validation' => [
+      '#upload_validators' => [
         'file_validate_extensions' => ['png jpg jpeg'],
         'file_validate_size' => [5242880],
       ],
@@ -145,7 +152,7 @@ class GuestBookAdminEdit extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Ajax validation.
    */
   public function mailValidateCallback(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
@@ -170,10 +177,9 @@ class GuestBookAdminEdit extends FormBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Validation before submit.
    */
   public function setMessage(array &$form, FormStateInterface $form_state, $id = NULL) {
-    //    \Drupal::messenger()->deleteAll();
     $response = new AjaxResponse();
     $user_name = strlen($form_state->getValue('name_user'));
     $user_avatar = ($form_state->getValue('fid_avatar'));
@@ -279,14 +285,6 @@ class GuestBookAdminEdit extends FormBase {
         $file_img->setPermanent();
         $file_img->save();
       }
-
-      //      $file_ava = File::load($file_fid_ava[0]);
-      //      $file_ava->setPermanent();
-      //      $file_ava->save();
-      //
-      //      $file_img = File::load($file_fid_img[0]);
-      //      $file_img->setPermanent();
-      //      $file_img->save();
 
       if (isset($this->id)) {
         \Drupal::database()->update('guest_book')->fields($data)->condition('id', $this->id)->execute();

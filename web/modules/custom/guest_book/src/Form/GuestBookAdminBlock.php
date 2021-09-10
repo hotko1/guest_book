@@ -16,6 +16,13 @@ use Drupal\Component\Serialization\Json;
  */
 class GuestBookAdminBlock extends FormBase {
 
+//  /**
+//   * The id of the item to be deleted.
+//   *
+//   * @var \Drupal\guest_book\Form\GuestBookAdminDelete
+//   */
+//  protected $id;
+
   /**
    * {@inheritdoc}
    */
@@ -62,16 +69,13 @@ class GuestBookAdminBlock extends FormBase {
       $domen = $_SERVER['SERVER_NAME'];
       $file_ava = File::load($data->fid_avatar);
       if (is_null($file_ava)) {
-        //        $data->fid_avatar = '';
         $image_ava = '/modules/custom/guest_book/files/default_ava.png';
       }
       else {
         $image_ava = $file_ava->createFileUrl();
       }
-      //      $image_ava = $file_ava->createFileUrl();
       $url_ava = "//{$domen}{$image_ava}";
       $out_ava = '<img class="avatar-user" src="' . $url_ava . '" alt="User avatar">';
-      //      $out_ava_link = '<a class="link-avatar" href="' . $url_ava . '" target="_blank">' . $out_ava . '</a>';
       $render_ava = render($out_ava);
       $ava_markup = Markup::create($render_ava);
 
@@ -87,12 +91,6 @@ class GuestBookAdminBlock extends FormBase {
         $render_img = render($out_img_link);
         $img_markup = Markup::create($render_img);
       }
-      //      $image_img = $file_img->createFileUrl();
-      //      $url_img = "//{$domen}{$image_img}";
-      //      $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
-      //      $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
-      //      $render_img = render($out_img_link);
-      //      $img_markup = Markup::create($render_img);
 
       $text_delete = t('Delete');
       $url_delete = Url::fromRoute('guest_book.admin_delete', ['id' => $data->id], []);
@@ -146,8 +144,6 @@ class GuestBookAdminBlock extends FormBase {
       '#attributes' => ['onclick' => 'if(!confirm("Do you want to delete data?")){return false;}'],
     ];
 
-//    $revers = array_reverse($rows);
-
     return $form;
   }
 
@@ -155,6 +151,7 @@ class GuestBookAdminBlock extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+//    $values = $form_state->getValue('table');
     $values = $form_state->getValues()['table'];
     $deletes = array_filter($values);
 
@@ -171,7 +168,7 @@ class GuestBookAdminBlock extends FormBase {
         $key_ava = $key_ava['fid_avatar'];
         $query_ava = \Drupal::database();
         $query_ava->update('file_managed')
-          ->condition('fid_avatar', $key_ava, 'IN')
+          ->condition('fid', $key_ava, 'IN')
           ->fields(['status' => '0'])
           ->execute();
       }
@@ -185,7 +182,7 @@ class GuestBookAdminBlock extends FormBase {
         $key_img = $key_img['fid_image'];
         $query_img = \Drupal::database();
         $query_img->update('file_managed')
-          ->condition('fid_image', $key_img, 'IN')
+          ->condition('fid', $key_img, 'IN')
           ->fields(['status' => '0'])
           ->execute();
       }

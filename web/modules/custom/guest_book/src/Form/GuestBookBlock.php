@@ -15,7 +15,7 @@ use Drupal\Component\Serialization\Json;
 class GuestBookBlock extends Database {
 
   /**
-   * {@inheritdoc}
+   * Get and render all responses.
    */
   public function build() {
     $query = \Drupal::database()->select('guest_book', 'n');
@@ -36,19 +36,16 @@ class GuestBookBlock extends Database {
       $times = $data->time_user;
       $time_out = date("d/m/Y H:i:s", $times);
 
-      $domen = $_SERVER['SERVER_NAME'];
+      $domain = $_SERVER['SERVER_NAME'];
       $file_ava = File::load($data->fid_avatar);
       if (is_null($file_ava)) {
-//        $data->fid_avatar = '';
         $image_ava = '/modules/custom/guest_book/files/default_ava.png';
       }
       else {
         $image_ava = $file_ava->createFileUrl();
       }
-//      $image_ava = $file_ava->createFileUrl();
-      $url_ava = "//{$domen}{$image_ava}";
+      $url_ava = "//{$domain}{$image_ava}";
       $out_ava = '<img class="avatar-user" src="' . $url_ava . '" alt="User avatar">';
-//      $out_ava_link = '<a class="link-avatar" href="' . $url_ava . '" target="_blank">' . $out_ava . '</a>';
       $render_ava = render($out_ava);
       $ava_markup = Markup::create($render_ava);
 
@@ -58,18 +55,12 @@ class GuestBookBlock extends Database {
       }
       else {
         $image_img = $file_img->createFileUrl();
-        $url_img = "//{$domen}{$image_img}";
+        $url_img = "//{$domain}{$image_img}";
         $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
         $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
         $render_img = render($out_img_link);
         $img_markup = Markup::create($render_img);
       }
-//      $image_img = $file_img->createFileUrl();
-//      $url_img = "//{$domen}{$image_img}";
-//      $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
-//      $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
-//      $render_img = render($out_img_link);
-//      $img_markup = Markup::create($render_img);
 
       $text_delete = t('Delete');
       $url_delete = Url::fromRoute('guest_book.delete_form', ['id' => $data->id], []);
