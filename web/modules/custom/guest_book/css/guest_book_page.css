@@ -75,10 +75,22 @@ a {
   letter-spacing: normal;
   color: #ff4500;
 }
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-name-user .input-group {
+  display: block;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-name-user .input-group .input-group-addon {
+  display: none;
+}
 .ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-email-user .input-group {
   display: block;
 }
 .ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-email-user .input-group .input-group-addon {
+  display: none;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-phone-user .input-group {
+  display: block;
+}
+.ui-widget-content .ui-dialog-content .guest-book-form-edit .form-item-phone-user .input-group .input-group-addon {
   display: none;
 }
 

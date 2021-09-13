@@ -60,7 +60,8 @@ class GuestBookAdminEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::nameValidateCallback',
-        'event' => 'change',
+//        'event' => 'change',
+//        'event' => ['submit', 'change'],
       ],
     ];
     $form['email_message'] = [
@@ -250,19 +251,27 @@ class GuestBookAdminEdit extends FormBase {
     }
     $key_img['0'] = $fid_img;
 
-    if ($user_name < 2) {
+//    if ($user_name < 2) {
+//      $response->addCommand(
+//        new HtmlCommand(
+//          '.name-result_message',
+//          '<div class="novalid">' . $this->t('Your name is too short. Please enter a full name.')
+//        )
+//      );
+//    }
+//    elseif (100 < $user_name) {
+//      $response->addCommand(
+//        new HtmlCommand(
+//          '.name-result_message',
+//          '<div class="novalid">' . $this->t('Your name is too long. Please enter a really name.')
+//        )
+//      );
+//    }
+    if (!preg_match('/^[a-zA-Z]{2,100}$/', $form_state->getValue('name_user'))) {
       $response->addCommand(
         new HtmlCommand(
           '.name-result_message',
-          '<div class="novalid">' . $this->t('Your name is too short. Please enter a full name.')
-        )
-      );
-    }
-    elseif (100 < $user_name) {
-      $response->addCommand(
-        new HtmlCommand(
-          '.name-result_message',
-          '<div class="novalid">' . $this->t('Your name is too long. Please enter a really name.')
+          '<div class="novalid">' . $this->t('Your name is not validate. Please enter a really name.')
         )
       );
     }

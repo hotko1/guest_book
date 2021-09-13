@@ -2,7 +2,6 @@
 
 namespace Drupal\guest_book\Form;
 
-//use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;

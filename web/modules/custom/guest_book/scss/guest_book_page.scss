@@ -31,7 +31,23 @@
           @include fontz(18px,36px,400,normal,#ff4500);
         }
       }
+      .form-item-name-user{
+        .input-group{
+          display: block;
+          .input-group-addon{
+            display: none;
+          }
+        }
+      }
       .form-item-email-user{
+        .input-group{
+          display: block;
+          .input-group-addon{
+            display: none;
+          }
+        }
+      }
+      .form-item-phone-user{
         .input-group{
           display: block;
           .input-group-addon{

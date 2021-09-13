@@ -60,7 +60,7 @@ class GuestBookEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::nameValidateCallback',
-        'event' => 'change',
+        'event' => 'mouseout',
       ],
     ];
     $form['email_message'] = [
@@ -77,7 +77,7 @@ class GuestBookEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::mailValidateCallback',
-        'event' => 'change',
+        'event' => 'mouseout',
       ],
     ];
     $form['phone_message'] = [
@@ -94,7 +94,7 @@ class GuestBookEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::phoneValidateCallback',
-        'event' => 'change',
+        'event' => 'mouseout',
       ],
     ];
     $form['message_message'] = [
