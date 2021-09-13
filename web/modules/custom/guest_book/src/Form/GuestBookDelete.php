@@ -20,11 +20,6 @@ class GuestBookDelete extends ConfirmFormBase {
    */
   protected $id;
 
-//  /**
-//   * {@inheritdoc}
-//   */
-//  public $id;
-
   /**
    * {@inheritdoc}
    */

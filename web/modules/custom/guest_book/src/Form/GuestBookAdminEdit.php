@@ -31,11 +31,6 @@ class GuestBookAdminEdit extends FormBase {
    */
   protected $id;
 
-//  /**
-//   * {@inheritdoc}
-//   */
-//  public $id;
-
   /**
    * {@inheritdoc}
    */
