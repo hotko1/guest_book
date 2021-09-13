@@ -16,12 +16,12 @@ use Drupal\Component\Serialization\Json;
  */
 class GuestBookAdminBlock extends FormBase {
 
-//  /**
-//   * The id of the item to be deleted.
-//   *
-//   * @var \Drupal\guest_book\Form\GuestBookAdminDelete
-//   */
-//  protected $id;
+  /**
+   * The id of the item to be deleted.
+   *
+   * @var \Drupal\guest_book\Form\GuestBookAdminDelete
+   */
+  protected $id;
 
   /**
    * {@inheritdoc}
@@ -34,6 +34,7 @@ class GuestBookAdminBlock extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+//    $this->id = $id;
     $query = \Drupal::database()->select('guest_book', 'n');
     $query->fields('n', [
       'id',
@@ -140,6 +141,7 @@ class GuestBookAdminBlock extends FormBase {
 
     $form['delete select'] = [
       '#type' => 'submit',
+//      '#name' => 'submit',
       '#value' => $this->t('Delete selected'),
       '#attributes' => ['onclick' => 'if(!confirm("Do you want to delete data?")){return false;}'],
     ];
@@ -151,48 +153,147 @@ class GuestBookAdminBlock extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-//    $values = $form_state->getValue('table');
-    $values = $form_state->getValues()['table'];
-    $deletes = array_filter($values);
+//    $value = $form_state->getValues()['table'];
+//    $value = $_SESSION['id'];
+//    $deletes = array_filter($values);
+//    $value = $form['table']['#options'];
+//    $value = $form['table']['#value'];
+//    $deletes = array_filter($value);
+//    $connection = \Drupal::service('database');
+//    $value = $value['id'];
+    
 
-    if ($deletes == NULL) {
-      $form_state->setRedirect('guest_book.admin_panel');
-    }
-    else {
-      $fid_ava = \Drupal::database()->select('guest_book', 'm')
-        ->condition('id', $deletes, 'IN')
-        ->fields('m', ['fid_avatar'])
-        ->execute()->fetchAll();
-      $fid_ava = json_decode(json_encode($fid_ava), TRUE);
-      foreach ($fid_ava as $key_ava) {
-        $key_ava = $key_ava['fid_avatar'];
-        $query_ava = \Drupal::database();
-        $query_ava->update('file_managed')
-          ->condition('fid', $key_ava, 'IN')
-          ->fields(['status' => '0'])
-          ->execute();
-      }
-
-      $fid_img = \Drupal::database()->select('guest_book', 'k')
-        ->condition('id', $deletes, 'IN')
-        ->fields('k', ['fid_image'])
-        ->execute()->fetchAll();
-      $fid_img = json_decode(json_encode($fid_img), TRUE);
-      foreach ($fid_img as $key_img) {
-        $key_img = $key_img['fid_image'];
-        $query_img = \Drupal::database();
-        $query_img->update('file_managed')
-          ->condition('fid', $key_img, 'IN')
-          ->fields(['status' => '0'])
-          ->execute();
-      }
-
-      $query = \Drupal::database();
-      $query->delete('guest_book')
-        ->condition('id', $deletes, 'IN')
-        ->execute();
-      $this->messenger()->addStatus($this->t('Successfully deleted'));
-    }
+//    if ($value == NULL) {
+//      $form_state->setRedirect('guest_book.admin_panel');
+//    }
+//    else {
+//      $fid_ava = \Drupal::database()->select('guest_book', 'm')
+//        ->condition('id', $value, 'IN')
+//        ->fields('m', ['fid_avatar'])
+//        ->execute()->fetchAll();
+//      $fid_ava = json_decode(json_encode($fid_ava), TRUE);
+//      foreach ($fid_ava as $key_ava) {
+//        $key_ava = $key_ava['fid_avatar'];
+//        $query_ava = \Drupal::database();
+//        $query_ava->update('file_managed')
+//          ->condition('fid_avatar', $key_ava, 'IN')
+//          ->fields(['status' => '0'])
+//          ->execute();
+//      }
+//
+//      $fid_img = \Drupal::database()->select('guest_book', 'k')
+//        ->condition('id', $value, 'IN')
+//        ->fields('k', ['fid_image'])
+//        ->execute()->fetchAll();
+//      $fid_img = json_decode(json_encode($fid_img), TRUE);
+//      foreach ($fid_img as $key_img) {
+//        $key_img = $key_img['fid_image'];
+//        $query_img = \Drupal::database();
+//        $query_img->update('file_managed')
+//          ->condition('fid_image', $key_img, 'IN')
+//          ->fields(['status' => '0'])
+//          ->execute();
+//      }
+//
+//      $query = \Drupal::database();
+//      $query->delete('guest_book')
+//        ->condition('id', $value, 'IN')
+//        ->execute();
+//      $this->messenger()->addStatus($this->t('Successfully deleted'));
+//    }
   }
+
+  //  /**
+//   * {@inheritdoc}
+//   */
+//  public function submitForm(array &$form, FormStateInterface $form_state) {
+//    $values = $form_state->getValues()['table'];
+//    $deletes = array_filter($values);
+//
+//    if ($deletes == NULL) {
+//      $form_state->setRedirect('guest_book.admin_panel');
+//    }
+//    else {
+//      $fid = \Drupal::database()->select('guest_book', 'data')
+//        ->condition('id', $deletes, 'IN')
+//        ->fields('data', ['fid_avatar', 'fid_image'])
+//        ->execute()->fetchAll();
+//      $fid = json_decode(json_encode($fid), TRUE);
+//      foreach ($fid as $key) {
+//        $key = $key['fid_avatar'];
+//        $query = \Drupal::database();
+//        $query->update('file_managed')
+//          ->condition('fid', $key, 'IN')
+//          ->fields(['status' => '0'])
+//          ->execute();
+//      }
+//
+//      $fid = \Drupal::database()->select('guest_book', 'data')
+//        ->condition('id', $deletes, 'IN')
+//        ->fields('data', ['fid_image'])
+//        ->execute()->fetchAll();
+//      $fid = json_decode(json_encode($fid), TRUE);
+//      foreach ($fid as $key) {
+//        $key = $key['fid_image'];
+//        $query = \Drupal::database();
+//        $query->update('file_managed')
+//          ->condition('fid', $key, 'IN')
+//          ->fields(['status' => '0'])
+//          ->execute();
+//      }
+//      $query = \Drupal::database();
+//      $query->delete('guest_book')
+//        ->condition('id', $deletes, 'IN')
+//        ->execute();
+//      $this->messenger()->addStatus($this->t('Successfully deleted'));
+//    }
+//  }
+
+//  /**
+//   * {@inheritdoc}
+//   */
+//  public function submitForm(array &$form, FormStateInterface $form_state) {
+//    $values = $form_state->getValues()['table'];
+//    $deletes = array_filter($values);
+//
+//    if ($deletes == NULL) {
+//      $form_state->setRedirect('guest_book.admin_panel');
+//    }
+//    else {
+//      $fid_ava = \Drupal::database()->select('guest_book', 'm')
+//        ->condition('id', $deletes, 'IN')
+//        ->fields('m', ['fid_avatar'])
+//        ->execute()->fetchAll();
+//      $fid_ava = json_decode(json_encode($fid_ava), TRUE);
+//      foreach ($fid_ava as $key_ava) {
+//        $key_ava = $key_ava['fid_avatar'];
+//        $query_ava = \Drupal::database();
+//        $query_ava->update('file_managed')
+//          ->condition('fid', $key_ava, 'IN')
+//          ->fields(['status' => '0'])
+//          ->execute();
+//      }
+//
+//      $fid_img = \Drupal::database()->select('guest_book', 'k')
+//        ->condition('id', $deletes, 'IN')
+//        ->fields('k', ['fid_image'])
+//        ->execute()->fetchAll();
+//      $fid_img = json_decode(json_encode($fid_img), TRUE);
+//      foreach ($fid_img as $key_img) {
+//        $key_img = $key_img['fid_image'];
+//        $query_img = \Drupal::database();
+//        $query_img->update('file_managed')
+//          ->condition('fid', $key_img, 'IN')
+//          ->fields(['status' => '0'])
+//          ->execute();
+//      }
+//
+//      $query = \Drupal::database();
+//      $query->delete('guest_book')
+//        ->condition('id', $deletes, 'IN')
+//        ->execute();
+//      $this->messenger()->addStatus($this->t('Successfully deleted'));
+//    }
+//  }
 
 }
