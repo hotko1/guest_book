@@ -118,7 +118,32 @@ class GuestBookForm extends FormBase {
   }
 
   /**
-   * Ajax validation.
+   * Ajax name validation.
+   */
+  public function nameValidateCallback(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    if (!preg_match('/^[a-zA-Z]{2,100}$/', $form_state->getValue('name_user'))) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.name-result_message',
+          '<div class="novalid">' . $this->t('Invalid name.')
+        )
+      );
+    }
+    else {
+      $response->addCommand(
+        new HtmlCommand(
+          '.email-result_message',
+          NULL
+        )
+      );
+    }
+
+    return $response;
+  }
+
+  /**
+   * Ajax mail validation.
    */
   public function mailValidateCallback(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
@@ -127,6 +152,31 @@ class GuestBookForm extends FormBase {
         new HtmlCommand(
           '.email-result_message',
           '<div class="novalid">' . $this->t('Invalid mail.')
+        )
+      );
+    }
+    else {
+      $response->addCommand(
+        new HtmlCommand(
+          '.email-result_message',
+          NULL
+        )
+      );
+    }
+
+    return $response;
+  }
+
+  /**
+   * Ajax phone validation.
+   */
+  public function phoneValidateCallback(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    if (!preg_match('/^[0-9]{12}$/', $form_state->getValue('phone_user'))) {
+      $response->addCommand(
+        new HtmlCommand(
+          '.phone-result_message',
+          '<div class="novalid">' . $this->t('Invalid phone.')
         )
       );
     }

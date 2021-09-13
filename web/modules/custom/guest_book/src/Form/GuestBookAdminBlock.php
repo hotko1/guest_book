@@ -2,7 +2,7 @@
 
 namespace Drupal\guest_book\Form;
 
-use Drupal\Core\Database\Database;
+//use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
@@ -17,13 +17,6 @@ use Drupal\Component\Serialization\Json;
 class GuestBookAdminBlock extends FormBase {
 
   /**
-   * The id of the item to be deleted.
-   *
-   * @var \Drupal\guest_book\Form\GuestBookAdminDelete
-   */
-  protected $id;
-
-  /**
    * {@inheritdoc}
    */
   public function getFormId() {
@@ -34,7 +27,6 @@ class GuestBookAdminBlock extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-//    $this->id = $id;
     $query = \Drupal::database()->select('guest_book', 'n');
     $query->fields('n', [
       'id',
@@ -67,7 +59,7 @@ class GuestBookAdminBlock extends FormBase {
       $times = $data->time_user;
       $time_out = date("d/m/Y H:i:s", $times);
 
-      $domen = $_SERVER['SERVER_NAME'];
+      $domain = $_SERVER['SERVER_NAME'];
       $file_ava = File::load($data->fid_avatar);
       if (is_null($file_ava)) {
         $image_ava = '/modules/custom/guest_book/files/default_ava.png';
@@ -75,7 +67,7 @@ class GuestBookAdminBlock extends FormBase {
       else {
         $image_ava = $file_ava->createFileUrl();
       }
-      $url_ava = "//{$domen}{$image_ava}";
+      $url_ava = "//{$domain}{$image_ava}";
       $out_ava = '<img class="avatar-user" src="' . $url_ava . '" alt="User avatar">';
       $render_ava = render($out_ava);
       $ava_markup = Markup::create($render_ava);
@@ -86,7 +78,7 @@ class GuestBookAdminBlock extends FormBase {
       }
       else {
         $image_img = $file_img->createFileUrl();
-        $url_img = "//{$domen}{$image_img}";
+        $url_img = "//{$domain}{$image_img}";
         $out_img = '<img class="image-user" src="' . $url_img . '" alt="User image">';
         $out_img_link = '<a class="link-image" href="' . $url_img . '" target="_blank">' . $out_img . '</a>';
         $render_img = render($out_img_link);
@@ -115,9 +107,9 @@ class GuestBookAdminBlock extends FormBase {
       ]);
       $link_edit = Link::fromTextAndUrl($text_edit, $url_edit);
 
-      $_id = $data->id;
-      $options[] = [
-        'id' => $_id,
+      $id = $data->id;
+      $options[$data->id] = [
+        'id' => $id,
         'fid_avatar' => $ava_markup,
         'name_user' => $data->name_user,
         'time_user' => $time_out,
@@ -128,8 +120,6 @@ class GuestBookAdminBlock extends FormBase {
         'delete' => $link_delete,
         'edit' => $link_edit,
       ];
-
-      global $_id;
     }
 
     $form['table'] = [
@@ -141,7 +131,6 @@ class GuestBookAdminBlock extends FormBase {
 
     $form['delete select'] = [
       '#type' => 'submit',
-//      '#name' => 'submit',
       '#value' => $this->t('Delete selected'),
       '#attributes' => ['onclick' => 'if(!confirm("Do you want to delete data?")){return false;}'],
     ];
@@ -153,147 +142,47 @@ class GuestBookAdminBlock extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-//    $value = $form_state->getValues()['table'];
-//    $value = $_SESSION['id'];
-//    $deletes = array_filter($values);
-//    $value = $form['table']['#options'];
-//    $value = $form['table']['#value'];
-//    $deletes = array_filter($value);
-//    $connection = \Drupal::service('database');
-//    $value = $value['id'];
-    
+    $values = $form_state->getValues()['table'];
+    $deletes = array_filter($values);
 
-//    if ($value == NULL) {
-//      $form_state->setRedirect('guest_book.admin_panel');
-//    }
-//    else {
-//      $fid_ava = \Drupal::database()->select('guest_book', 'm')
-//        ->condition('id', $value, 'IN')
-//        ->fields('m', ['fid_avatar'])
-//        ->execute()->fetchAll();
-//      $fid_ava = json_decode(json_encode($fid_ava), TRUE);
-//      foreach ($fid_ava as $key_ava) {
-//        $key_ava = $key_ava['fid_avatar'];
-//        $query_ava = \Drupal::database();
-//        $query_ava->update('file_managed')
-//          ->condition('fid_avatar', $key_ava, 'IN')
-//          ->fields(['status' => '0'])
-//          ->execute();
-//      }
-//
-//      $fid_img = \Drupal::database()->select('guest_book', 'k')
-//        ->condition('id', $value, 'IN')
-//        ->fields('k', ['fid_image'])
-//        ->execute()->fetchAll();
-//      $fid_img = json_decode(json_encode($fid_img), TRUE);
-//      foreach ($fid_img as $key_img) {
-//        $key_img = $key_img['fid_image'];
-//        $query_img = \Drupal::database();
-//        $query_img->update('file_managed')
-//          ->condition('fid_image', $key_img, 'IN')
-//          ->fields(['status' => '0'])
-//          ->execute();
-//      }
-//
-//      $query = \Drupal::database();
-//      $query->delete('guest_book')
-//        ->condition('id', $value, 'IN')
-//        ->execute();
-//      $this->messenger()->addStatus($this->t('Successfully deleted'));
-//    }
+    if ($deletes == NULL) {
+      $form_state->setRedirect('guest_book.admin_panel');
+    }
+    else {
+      $fid_ava = \Drupal::database()->select('guest_book', 'm')
+        ->condition('id', $deletes, 'IN')
+        ->fields('m', ['fid_avatar'])
+        ->execute()->fetchAll();
+      $fid_ava = json_decode(json_encode($fid_ava), TRUE);
+      foreach ($fid_ava as $key_ava) {
+        $key_ava = $key_ava['fid_avatar'];
+        $query_ava = \Drupal::database();
+        $query_ava->update('file_managed')
+          ->condition('fid', $key_ava, 'IN')
+          ->fields(['status' => '0'])
+          ->execute();
+      }
+
+      $fid_img = \Drupal::database()->select('guest_book', 'k')
+        ->condition('id', $deletes, 'IN')
+        ->fields('k', ['fid_image'])
+        ->execute()->fetchAll();
+      $fid_img = json_decode(json_encode($fid_img), TRUE);
+      foreach ($fid_img as $key_img) {
+        $key_img = $key_img['fid_image'];
+        $query_img = \Drupal::database();
+        $query_img->update('file_managed')
+          ->condition('fid', $key_img, 'IN')
+          ->fields(['status' => '0'])
+          ->execute();
+      }
+
+      $query = \Drupal::database();
+      $query->delete('guest_book')
+        ->condition('id', $deletes, 'IN')
+        ->execute();
+      $this->messenger()->addStatus($this->t('Successfully deleted'));
+    }
   }
-
-  //  /**
-//   * {@inheritdoc}
-//   */
-//  public function submitForm(array &$form, FormStateInterface $form_state) {
-//    $values = $form_state->getValues()['table'];
-//    $deletes = array_filter($values);
-//
-//    if ($deletes == NULL) {
-//      $form_state->setRedirect('guest_book.admin_panel');
-//    }
-//    else {
-//      $fid = \Drupal::database()->select('guest_book', 'data')
-//        ->condition('id', $deletes, 'IN')
-//        ->fields('data', ['fid_avatar', 'fid_image'])
-//        ->execute()->fetchAll();
-//      $fid = json_decode(json_encode($fid), TRUE);
-//      foreach ($fid as $key) {
-//        $key = $key['fid_avatar'];
-//        $query = \Drupal::database();
-//        $query->update('file_managed')
-//          ->condition('fid', $key, 'IN')
-//          ->fields(['status' => '0'])
-//          ->execute();
-//      }
-//
-//      $fid = \Drupal::database()->select('guest_book', 'data')
-//        ->condition('id', $deletes, 'IN')
-//        ->fields('data', ['fid_image'])
-//        ->execute()->fetchAll();
-//      $fid = json_decode(json_encode($fid), TRUE);
-//      foreach ($fid as $key) {
-//        $key = $key['fid_image'];
-//        $query = \Drupal::database();
-//        $query->update('file_managed')
-//          ->condition('fid', $key, 'IN')
-//          ->fields(['status' => '0'])
-//          ->execute();
-//      }
-//      $query = \Drupal::database();
-//      $query->delete('guest_book')
-//        ->condition('id', $deletes, 'IN')
-//        ->execute();
-//      $this->messenger()->addStatus($this->t('Successfully deleted'));
-//    }
-//  }
-
-//  /**
-//   * {@inheritdoc}
-//   */
-//  public function submitForm(array &$form, FormStateInterface $form_state) {
-//    $values = $form_state->getValues()['table'];
-//    $deletes = array_filter($values);
-//
-//    if ($deletes == NULL) {
-//      $form_state->setRedirect('guest_book.admin_panel');
-//    }
-//    else {
-//      $fid_ava = \Drupal::database()->select('guest_book', 'm')
-//        ->condition('id', $deletes, 'IN')
-//        ->fields('m', ['fid_avatar'])
-//        ->execute()->fetchAll();
-//      $fid_ava = json_decode(json_encode($fid_ava), TRUE);
-//      foreach ($fid_ava as $key_ava) {
-//        $key_ava = $key_ava['fid_avatar'];
-//        $query_ava = \Drupal::database();
-//        $query_ava->update('file_managed')
-//          ->condition('fid', $key_ava, 'IN')
-//          ->fields(['status' => '0'])
-//          ->execute();
-//      }
-//
-//      $fid_img = \Drupal::database()->select('guest_book', 'k')
-//        ->condition('id', $deletes, 'IN')
-//        ->fields('k', ['fid_image'])
-//        ->execute()->fetchAll();
-//      $fid_img = json_decode(json_encode($fid_img), TRUE);
-//      foreach ($fid_img as $key_img) {
-//        $key_img = $key_img['fid_image'];
-//        $query_img = \Drupal::database();
-//        $query_img->update('file_managed')
-//          ->condition('fid', $key_img, 'IN')
-//          ->fields(['status' => '0'])
-//          ->execute();
-//      }
-//
-//      $query = \Drupal::database();
-//      $query->delete('guest_book')
-//        ->condition('id', $deletes, 'IN')
-//        ->execute();
-//      $this->messenger()->addStatus($this->t('Successfully deleted'));
-//    }
-//  }
 
 }

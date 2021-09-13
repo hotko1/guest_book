@@ -20,11 +20,6 @@ class GuestBookAdminDelete extends ConfirmFormBase {
    */
   protected $id;
 
-//  /**
-//   * I set the scope.
-//   */
-//  public $id;
-
   /**
    * {@inheritdoc}
    */
