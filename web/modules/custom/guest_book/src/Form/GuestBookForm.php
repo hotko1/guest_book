@@ -39,6 +39,10 @@ class GuestBookForm extends FormBase {
       '#attributes' => [
         'placeholder' => $this->t('The length of name is 2-100 letters.'),
       ],
+      '#ajax' => [
+        'callback' => '::nameValidateCallback',
+        'event' => 'keyup',
+      ],
     ];
     $form['email_message'] = [
       '#type' => 'markup',
@@ -66,6 +70,10 @@ class GuestBookForm extends FormBase {
       '#required' => TRUE,
       '#attributes' => [
         'placeholder' => '99 999 999 9999',
+      ],
+      '#ajax' => [
+        'callback' => '::phoneValidateCallback',
+        'event' => 'keyup',
       ],
     ];
     $form['message_message'] = [
@@ -133,7 +141,7 @@ class GuestBookForm extends FormBase {
     else {
       $response->addCommand(
         new HtmlCommand(
-          '.email-result_message',
+          '.name-result_message',
           NULL
         )
       );
@@ -183,7 +191,7 @@ class GuestBookForm extends FormBase {
     else {
       $response->addCommand(
         new HtmlCommand(
-          '.email-result_message',
+          '.phone-result_message',
           NULL
         )
       );
