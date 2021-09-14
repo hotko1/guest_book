@@ -60,8 +60,7 @@ class GuestBookAdminEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::nameValidateCallback',
-//        'event' => 'change',
-//        'event' => ['submit', 'change'],
+        'event' => 'mouseout',
       ],
     ];
     $form['email_message'] = [
@@ -78,7 +77,7 @@ class GuestBookAdminEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::mailValidateCallback',
-        'event' => 'change',
+        'event' => 'mouseout',
       ],
     ];
     $form['phone_message'] = [
@@ -95,7 +94,7 @@ class GuestBookAdminEdit extends FormBase {
       ],
       '#ajax' => [
         'callback' => '::phoneValidateCallback',
-        'event' => 'change',
+        'event' => 'mouseout',
       ],
     ];
     $form['message_message'] = [
@@ -140,7 +139,7 @@ class GuestBookAdminEdit extends FormBase {
     ];
     $form['submit'] = [
       '#type' => 'button',
-      '#value' => $this->t('Edit response'),
+      '#value' => $this->t('Save'),
       '#ajax' => [
         'callback' => '::setMessage',
         'event' => 'click',
@@ -251,22 +250,6 @@ class GuestBookAdminEdit extends FormBase {
     }
     $key_img['0'] = $fid_img;
 
-//    if ($user_name < 2) {
-//      $response->addCommand(
-//        new HtmlCommand(
-//          '.name-result_message',
-//          '<div class="novalid">' . $this->t('Your name is too short. Please enter a full name.')
-//        )
-//      );
-//    }
-//    elseif (100 < $user_name) {
-//      $response->addCommand(
-//        new HtmlCommand(
-//          '.name-result_message',
-//          '<div class="novalid">' . $this->t('Your name is too long. Please enter a really name.')
-//        )
-//      );
-//    }
     if (!preg_match('/^[a-zA-Z]{2,100}$/', $form_state->getValue('name_user'))) {
       $response->addCommand(
         new HtmlCommand(
@@ -295,7 +278,7 @@ class GuestBookAdminEdit extends FormBase {
       $response->addCommand(
         new HtmlCommand(
           '.result_message',
-          '<div class="valid">' . $form_state->getValue('name_user') . $this->t('your message has been saved.')
+          '<div class="valid">' . $form_state->getValue('name_user') . ' ' . $this->t('your message has been saved.')
         )
       );
 
